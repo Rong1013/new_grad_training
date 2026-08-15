@@ -1,6 +1,4 @@
-# HW5: torch.compile vs eager，以及算子融合能干什么、不能干什么
-
-这份笔记回答两件事：
+# torch.compile vs eager，以及算子融合能干什么、不能干什么
 
 1. eager 执行和 `torch.compile` 执行差在哪里，为什么后者会更快。
 2. 一个模型里，哪些算子之间能融、哪些不能融，融合到底能省什么。
