@@ -1,0 +1,1 @@
+/opt/dtk/bin/hipcc -O3 -DNDEBUG --offload-arch=gfx936 CMakeFiles/hipblas_gemm.dir/src/hipblas_gemm.cpp.o -o hipblas_gemm  -lhipblas -lamdhip64

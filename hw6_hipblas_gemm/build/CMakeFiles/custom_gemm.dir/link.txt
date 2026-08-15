@@ -1,0 +1,1 @@
+/opt/dtk/bin/hipcc -O3 -DNDEBUG --offload-arch=gfx936 CMakeFiles/custom_gemm.dir/src/custom_gemm.cpp.o -o custom_gemm  -lamdhip64
