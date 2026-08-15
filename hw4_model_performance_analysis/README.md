@@ -1,4 +1,4 @@
-# HW4 模型性能分析笔记
+#  模型性能分析笔记
 
 ## 一、`train_perf_bottleneck_model.py` 是干什么的
 
