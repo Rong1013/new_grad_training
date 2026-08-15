@@ -1,0 +1,32 @@
+torch: 2.9.0
+
+==========================================================================================
+[A] TORCH_SHOW_DISPATCH_TRACE=1  —— 观察 Dispatcher 每一次 lookup 命中的 key
+==========================================================================================
+  total stderr lines : 0
+  lines mentioning 'add' : 0
+  (nothing captured — 说明当前 torch wheel 是 release build，
+   TORCH_SHOW_DISPATCH_TRACE 被预处理掉了。要看到 trace 需要用
+   DEBUG=1 python setup.py develop 自行编译的 debug build。)
+  → 替代方案：用脚本 02_torch_dispatch_trace.py 在 Python 层拦截；
+     或用 03_profiler_trace.py 的 chrome trace 看 kernel 层次。
+
+==========================================================================================
+[B] Autograd graph —— 从 add 的输出反向遍历 grad_fn.next_functions
+==========================================================================================
+  d.grad_fn = <SumBackward0 object at 0x7fa337b2fb80>
+  - SumBackward0
+    - MulBackward0
+      - AddBackward0
+        - AccumulateGrad
+        - AccumulateGrad
+
+  backward hook fired on AddBackward0: [('AddBackward0', [torch.Size([3, 3])])]
+  a.grad shape = (3, 3)  b.grad shape = (3, 3)
+
+==========================================================================================
+[C] TorchFunctionMode —— Python 层最外层的拦截点
+==========================================================================================
+  logged calls: ['torch._VariableFunctionsClass.add', 'TensorBase.add', 'TensorBase.add']
+  results equal: True
+

@@ -1,0 +1,135 @@
+/workspace/new_grad_training/hw3_trace_add_op/03_profiler_trace.py:122: FutureWarning: `cuda_time_total` is deprecated. Use `device_time_total` instead.
+  cuda_us = getattr(e, "cuda_time_total", 0)
+WARNING: Logging before InitGoogleLogging() is written to STDERR
+W0801 17:58:54.311897 454681 collection.cpp:1133] Warning: ROCTracer produced duplicate flow start: 82 (function operator())
+torch: 2.9.0 cuda: True
+
+==========================================================================================
+[profiler] forward/cpu
+==========================================================================================
+------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------------------------------  ------------  
+                    Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg    # of Calls                          Input Shapes  Total MFLOPs  
+------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------------------------------  ------------  
+           aten::normal_        63.98%      25.459ms        63.98%      25.459ms      12.729ms             2            [[1024, 1024], [], [], []]            --  
+               aten::add        33.25%      13.232ms        33.25%      13.232ms       2.646ms             5      [[1024, 1024], [1024, 1024], []]         5.243  
+           py::torch.add         2.20%     876.191us        35.46%      14.108ms       2.822ms             5                                    []            --  
+             aten::randn         0.35%     140.540us        64.51%      25.668ms      12.834ms             2                  [[], [], [], [], []]            --  
+             aten::empty         0.17%      68.960us         0.17%      68.960us      34.480us             2              [[], [], [], [], [], []]            --  
+    hipDeviceSynchronize         0.03%      12.930us         0.03%      12.930us      12.930us             1                                    []            --  
+------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------------------------------  ------------  
+Self CPU time total: 39.789ms
+
+  -> chrome trace saved: /workspace/new_grad_training/hw3_trace_add_op/add_forward_trace_cpu.json
+
+==========================================================================================
+[profiler] backward/cpu
+==========================================================================================
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                                   Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg    # of Calls  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                              aten::mul        29.56%       4.249ms        30.47%       4.379ms       1.460ms             3  
+                                 py::c.sum().backward()        18.75%       2.695ms        99.92%      14.361ms       4.787ms             3  
+                                             aten::add_        17.99%       2.586ms        17.99%       2.586ms     646.399us             4  
+                                              aten::sum        12.41%       1.784ms        14.08%       2.023ms     674.465us             3  
+                                            aten::copy_        12.28%       1.765ms        12.28%       1.765ms     252.168us             7  
+                        torch::autograd::AccumulateGrad         3.24%     466.052us        33.07%       4.753ms     792.111us             6  
+                                           SumBackward0         0.66%      95.160us         1.29%     186.110us      62.037us             3  
+                                       aten::empty_like         0.58%      82.690us         0.73%     105.240us      35.080us             3  
+                                           aten::expand         0.55%      78.390us         0.63%      90.950us      30.317us             3  
+                                       aten::as_strided         0.52%      75.210us         0.52%      75.210us       6.267us            12  
+                                        aten::ones_like         0.48%      68.450us         1.23%     176.520us      58.840us             3  
+autograd::engine::evaluate_function: torch::autograd...         0.47%      67.950us        33.54%       4.821ms     803.436us             6  
+                                           aten::select         0.35%      50.500us         0.39%      55.940us      18.647us             3  
+                                               aten::to         0.34%      49.260us         0.90%     129.840us      43.280us             3  
+                                         aten::_to_copy         0.30%      43.640us         0.56%      80.580us      26.860us             3  
+                                    aten::empty_strided         0.29%      41.220us         0.29%      41.220us       5.889us             7  
+                                           AddBackward0         0.26%      36.980us        30.72%       4.416ms       1.472ms             3  
+      autograd::engine::evaluate_function: SumBackward0         0.18%      25.710us         1.47%     211.820us      70.607us             3  
+                                            aten::fill_         0.16%      22.900us         0.16%      22.900us       3.817us             6  
+                                        aten::unsqueeze         0.15%      21.840us         0.19%      26.630us       8.877us             3  
+      autograd::engine::evaluate_function: AddBackward0         0.13%      18.190us        30.85%       4.434ms       1.478ms             3  
+                                            aten::empty         0.12%      17.061us         0.12%      17.061us       5.687us             3  
+                                   hipDeviceSynchronize         0.08%      10.950us         0.08%      10.950us      10.950us             1  
+                                                 detach         0.07%      10.140us         0.07%      10.140us      10.140us             1  
+                                aten::new_empty_strided         0.05%       7.130us         0.11%      15.850us      15.850us             1  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  
+Self CPU time total: 14.372ms
+
+  -> chrome trace saved: /workspace/new_grad_training/hw3_trace_add_op/add_backward_trace_cpu.json
+
+==========================================================================================
+[raw events with 'add' in name]  device=cpu
+==========================================================================================
+  py::torch.add                                                cpu=  1006.9us  cuda=     0.0us  shapes=[]
+  aten::add                                                    cpu=   713.9us  cuda=     0.0us  shapes=[[1024, 1024], [1024, 1024], []]
+
+==========================================================================================
+[profiler] forward/cuda
+==========================================================================================
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------------------------------  ------------  
+                                                   Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg     Self CUDA   Self CUDA %    CUDA total  CUDA time avg    # of Calls                          Input Shapes  Total MFLOPs  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------------------------------  ------------  
+                                          py::torch.add         0.00%       0.000us         0.00%       0.000us       0.000us     156.955us        85.68%     156.955us      31.391us             5                                    []            --  
+                                              aten::add        12.04%     155.380us        28.68%     370.192us      74.038us      95.514us        52.14%      95.514us      19.103us             5      [[1024, 1024], [1024, 1024], []]         5.243  
+                                        Memset (Device)         0.00%       0.000us         0.00%       0.000us       0.000us      80.958us        44.19%      80.958us      40.479us             2                                    []            --  
+void at::native::vectorized_elementwise_kernel<4, at...         0.00%       0.000us         0.00%       0.000us       0.000us      55.355us        30.22%      55.355us      11.071us             5                                    []            --  
+                                          aten::normal_         5.83%      75.240us         6.97%      89.980us      44.990us      46.878us        25.59%      46.878us      23.439us             2            [[1024, 1024], [], [], []]            --  
+void at::native::(anonymous namespace)::distribution...         0.00%       0.000us         0.00%       0.000us       0.000us      46.878us        25.59%      46.878us      23.439us             2                                    []            --  
+                                            aten::empty        10.57%     136.450us        29.41%     379.651us     189.825us      40.799us        22.27%      40.799us      20.399us             2              [[], [], [], [], [], []]            --  
+                                            aten::randn         3.97%      51.250us        40.36%     520.881us     260.440us       0.000us         0.00%      87.677us      43.839us             2                  [[], [], [], [], []]            --  
+                                   hipStreamIsCapturing         0.24%       3.110us         0.24%       3.110us       0.518us       0.000us         0.00%       0.000us       0.000us             6                                    []            --  
+                                              hipMalloc        30.85%     398.242us        30.85%     398.242us     199.121us       0.000us         0.00%       0.000us       0.000us             2                                    []            --  
+                                        hipLaunchKernel         5.53%      71.401us         5.53%      71.401us      10.200us       0.000us         0.00%       0.000us       0.000us             7                                    []            --  
+                                          py::torch.add        29.02%     374.620us        57.71%     744.812us     148.962us       0.000us         0.00%      95.514us      19.103us             5                                    []            --  
+                                   hipDeviceSynchronize         1.94%      25.020us         1.94%      25.020us      12.510us       0.000us         0.00%       0.000us       0.000us             2                                    []            --  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------------------------------  ------------  
+Self CPU time total: 1.291ms
+Self CUDA time total: 183.191us
+
+  -> chrome trace saved: /workspace/new_grad_training/hw3_trace_add_op/add_forward_trace_cuda.json
+
+==========================================================================================
+[profiler] backward/cuda
+==========================================================================================
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                                   Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg     Self CUDA   Self CUDA %    CUDA total  CUDA time avg    # of Calls  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                 py::c.sum().backward()         0.00%       0.000us         0.00%       0.000us       0.000us       7.186ms      4213.36%       7.186ms       2.395ms             3  
+                                              aten::sum         0.56%     234.230us        10.28%       4.321ms       1.440ms      62.394us        36.59%      62.394us      20.798us             3  
+                                             aten::add_         0.19%      79.160us         0.33%     137.891us      34.473us      51.036us        29.93%      51.036us      12.759us             4  
+void at::native::reduce_kernel<512, 1, at::native::R...         0.00%       0.000us         0.00%       0.000us       0.000us      46.237us        27.11%      46.237us      15.412us             3  
+                                              aten::mul         0.73%     306.051us        22.70%       9.541ms       3.180ms      35.517us        20.83%      35.517us      11.839us             3  
+void at::native::elementwise_kernel_manual_unroll<12...         0.00%       0.000us         0.00%       0.000us       0.000us      35.517us        20.83%      35.517us      11.839us             3  
+void at::native::vectorized_elementwise_kernel<4, at...         0.00%       0.000us         0.00%       0.000us       0.000us      25.598us        15.01%      25.598us      12.799us             2  
+void at::native::elementwise_kernel_manual_unroll<12...         0.00%       0.000us         0.00%       0.000us       0.000us      25.438us        14.92%      25.438us      12.719us             2  
+                                        Memset (Device)         0.00%       0.000us         0.00%       0.000us       0.000us      16.157us         9.47%      16.157us       5.386us             3  
+                                            aten::copy_         0.24%     102.870us        15.70%       6.599ms       6.599ms      12.959us         7.60%      12.959us      12.959us             1  
+void at::native::elementwise_kernel_manual_unroll<12...         0.00%       0.000us         0.00%       0.000us       0.000us      12.959us         7.60%      12.959us      12.959us             1  
+                                            aten::fill_         0.12%      48.440us         6.79%       2.852ms     950.776us       8.637us         5.06%       8.637us       2.879us             3  
+void at::native::vectorized_elementwise_kernel<4, at...         0.00%       0.000us         0.00%       0.000us       0.000us       8.637us         5.06%       8.637us       2.879us             3  
+                                 py::c.sum().backward()        42.65%      17.925ms        59.89%      25.168ms       8.389ms       0.000us         0.00%      71.031us      23.677us             3  
+                                       aten::as_strided         0.11%      44.630us         0.11%      44.630us       7.438us       0.000us         0.00%       0.000us       0.000us             6  
+                                         hipMemsetAsync         0.09%      36.100us         0.09%      36.100us      12.033us       0.000us         0.00%       0.000us       0.000us             3  
+                                        hipLaunchKernel        53.84%      22.628ms        53.84%      22.628ms       1.616ms       0.000us         0.00%       0.000us       0.000us            14  
+                                        aten::ones_like         0.05%      22.970us         6.95%       2.923ms     974.179us       0.000us         0.00%       8.637us       2.879us             3  
+                                       aten::empty_like         0.05%      19.360us         0.11%      47.240us      15.747us       0.000us         0.00%       0.000us       0.000us             3  
+                                    aten::empty_strided         0.14%      60.870us         0.14%      60.870us      15.217us       0.000us         0.00%       0.000us       0.000us             4  
+      autograd::engine::evaluate_function: SumBackward0         0.21%      86.970us         0.55%     229.791us      76.597us       0.000us         0.00%       0.000us       0.000us             3  
+                                           SumBackward0         0.13%      56.601us         0.34%     142.821us      47.607us       0.000us         0.00%       0.000us       0.000us             3  
+                                           aten::expand         0.14%      57.650us         0.21%      86.220us      28.740us       0.000us         0.00%       0.000us       0.000us             3  
+      autograd::engine::evaluate_function: AddBackward0         0.12%      50.180us        22.89%       9.618ms       3.206ms       0.000us         0.00%      35.517us      11.839us             3  
+                                           AddBackward0         0.06%      26.610us        22.77%       9.568ms       3.189ms       0.000us         0.00%      35.517us      11.839us             3  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+Self CPU time total: 42.024ms
+Self CUDA time total: 170.543us
+
+  -> chrome trace saved: /workspace/new_grad_training/hw3_trace_add_op/add_backward_trace_cuda.json
+
+==========================================================================================
+[raw events with 'add' in name]  device=cuda
+==========================================================================================
+  py::torch.add                                                cpu=   117.3us  cuda=     9.9us  shapes=[]
+  aten::add                                                    cpu=    40.0us  cuda=     9.9us  shapes=[[1024, 1024], [1024, 1024], []]
+  void at::native::vectorized_elementwise_kernel<4, at::native::CUDAFunctor_add<float>, std::array<char*, 3ul> >(int, at::native::CUDAFunctor_add<float>, std::array<char*, 3ul>) cpu=     0.0us  cuda=     9.9us  shapes=[]
+  py::torch.add                                                cpu=     0.0us  cuda=     9.9us  shapes=[]
+

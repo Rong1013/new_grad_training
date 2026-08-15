@@ -1,0 +1,82 @@
+torch: 2.9.0 cuda: True
+==========================================================================================
+[scene] CPU, no_grad, torch.add(a, b)
+  [cpu/no_grad] aten.add.Tensor
+    schema : aten::add.Tensor(Tensor self, Tensor other, *, Scalar alpha=1) -> Tensor
+    args   : Tensor(dev=cpu, dtype=torch.float32, shape=(3, 4), req_grad=False), Tensor(dev=cpu, dtype=torch.float32, shape=(3, 4), req_grad=False)
+    → Tensor(dev=cpu, dtype=torch.float32, shape=(3, 4), req_grad=False)
+
+  result sum = 3.3888
+
+[scene] CPU, requires_grad=True, torch.add(a, b, alpha=2)
+  [cpu/autograd] aten.add.Tensor
+    schema : aten::add.Tensor(Tensor self, Tensor other, *, Scalar alpha=1) -> Tensor
+    args   : Tensor(dev=cpu, dtype=torch.float32, shape=(3, 4), req_grad=True), Tensor(dev=cpu, dtype=torch.float32, shape=(3, 4), req_grad=True)
+    kwargs : alpha=2
+    → Tensor(dev=cpu, dtype=torch.float32, shape=(3, 4), req_grad=False)
+
+  grad_fn = <AddBackward0 object at 0x7f3ecd84bbe0>
+  next_functions = ((<AccumulateGrad object at 0x7f3ecd84bbb0>, 0), (<AccumulateGrad object at 0x7f3ecd84b820>, 0))
+
+[scene] backward on the above tensor
+  [cpu/backward] aten.sum.default
+    schema : aten::sum(Tensor self, *, ScalarType? dtype=None) -> Tensor
+    args   : Tensor(dev=cpu, dtype=torch.float32, shape=(3, 4), req_grad=True)
+    → Tensor(dev=cpu, dtype=torch.float32, shape=(), req_grad=False)
+
+  [cpu/backward] aten.ones_like.default
+    schema : aten::ones_like(Tensor self, *, ScalarType? dtype=None, Layout? layout=None, Device? device=None, bool? pin_memory=None, MemoryFormat? memory_format=None) -> Tensor
+    args   : Tensor(dev=cpu, dtype=torch.float32, shape=(), req_grad=True)
+    kwargs : pin_memory=False, memory_format=torch.preserve_format
+    → Tensor(dev=cpu, dtype=torch.float32, shape=(), req_grad=False)
+
+  [cpu/backward] aten.expand.default
+    schema : aten::expand(Tensor(a) self, SymInt[] size, *, bool implicit=False) -> Tensor(a)
+    args   : Tensor(dev=cpu, dtype=torch.float32, shape=(), req_grad=False), [3, 4]
+    → Tensor(dev=cpu, dtype=torch.float32, shape=(3, 4), req_grad=False)
+
+  [cpu/backward] aten.mul.Scalar
+    schema : aten::mul.Scalar(Tensor self, Scalar other) -> Tensor
+    args   : Tensor(dev=cpu, dtype=torch.float32, shape=(3, 4), req_grad=False), 2
+    → Tensor(dev=cpu, dtype=torch.float32, shape=(3, 4), req_grad=False)
+
+  [cpu/backward] aten.new_empty_strided.default
+    schema : aten::new_empty_strided(Tensor self, SymInt[] size, SymInt[] stride, *, ScalarType? dtype=None, Layout? layout=None, Device? device=None, bool? pin_memory=None) -> Tensor
+    args   : Tensor(dev=cpu, dtype=torch.float32, shape=(3, 4), req_grad=False), [3, 4], [4, 1]
+    kwargs : dtype=torch.float32, layout=torch.strided, device=device(type='cpu')
+    → Tensor(dev=cpu, dtype=torch.float32, shape=(3, 4), req_grad=False)
+
+  [cpu/backward] aten.copy_.default
+    schema : aten::copy_(Tensor(a!) self, Tensor src, bool non_blocking=False) -> Tensor(a!)
+    args   : Tensor(dev=cpu, dtype=torch.float32, shape=(3, 4), req_grad=False), Tensor(dev=cpu, dtype=torch.float32, shape=(3, 4), req_grad=False)
+    → Tensor(dev=cpu, dtype=torch.float32, shape=(3, 4), req_grad=False)
+
+  [cpu/backward] aten.detach.default
+    schema : aten::detach(Tensor(a) self) -> Tensor(a)
+    args   : Tensor(dev=cpu, dtype=torch.float32, shape=(3, 4), req_grad=False)
+    → Tensor(dev=cpu, dtype=torch.float32, shape=(3, 4), req_grad=False)
+
+  [cpu/backward] aten.detach.default
+    schema : aten::detach(Tensor(a) self) -> Tensor(a)
+    args   : Tensor(dev=cpu, dtype=torch.float32, shape=(3, 4), req_grad=False)
+    → Tensor(dev=cpu, dtype=torch.float32, shape=(3, 4), req_grad=False)
+
+  a.grad shape = (3, 4)  (should equal a.shape)
+
+[scene] CPU, torch.add(a, 3.0)  (Scalar 重载)
+  [cpu/scalar] aten.add.Tensor
+    schema : aten::add.Tensor(Tensor self, Tensor other, *, Scalar alpha=1) -> Tensor
+    args   : Tensor(dev=cpu, dtype=torch.float32, shape=(3, 4), req_grad=False), 3.0
+    → Tensor(dev=cpu, dtype=torch.float32, shape=(3, 4), req_grad=False)
+
+  result sum = 32.3693
+
+[scene] CUDA, requires_grad=True, torch.add(a, b, alpha=0.5)
+  [cuda/autograd] aten.add.Tensor
+    schema : aten::add.Tensor(Tensor self, Tensor other, *, Scalar alpha=1) -> Tensor
+    args   : Tensor(dev=cuda:0, dtype=torch.float32, shape=(2, 3), req_grad=True), Tensor(dev=cuda:0, dtype=torch.float32, shape=(2, 3), req_grad=True)
+    kwargs : alpha=0.5
+    → Tensor(dev=cuda:0, dtype=torch.float32, shape=(2, 3), req_grad=False)
+
+  grad_fn = <AddBackward0 object at 0x7f3ecd84bbb0>
+

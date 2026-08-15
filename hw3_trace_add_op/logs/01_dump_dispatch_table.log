@@ -1,0 +1,207 @@
+torch: 2.9.0
+cuda available: True
+
+==========================================================================================
+[dispatch table] aten::add.Tensor
+==========================================================================================
+  name: aten::add.Tensor
+  schema: aten::add.Tensor(Tensor self, Tensor other, *, Scalar alpha=1) -> Tensor
+  debug: registered at /home/pytorch/build/aten/src/ATen/RegisterSchema.cpp:6
+  alias analysis kind: FROM_SCHEMA
+  MkldnnCPU: registered at /home/pytorch/build/aten/src/ATen/RegisterMkldnnCPU_0.cpp:162 :: (Tensor _0, Tensor _1, Scalar _2) -> Tensor _0 [ boxed unboxed ]
+  Named: registered at /home/pytorch/aten/src/ATen/core/NamedRegistrations.cpp:11 :: (none) [ fallthrough boxed ]
+  ZeroTensor: registered at /home/pytorch/build/aten/src/ATen/RegisterZeroTensor_0.cpp:114 :: (Tensor _0, Tensor _1, Scalar _2) -> Tensor _0 [ boxed unboxed ]
+  Tracer: registered at /home/pytorch/torch/csrc/autograd/generated/TraceType_2.cpp:18340 :: (Tensor _0, Tensor _1, Scalar _2) -> Tensor _0 [ boxed unboxed ]
+  FuncTorchBatched: registered at /home/pytorch/aten/src/ATen/functorch/BatchRulesBinaryOps.cpp:352 :: (Tensor _0, Tensor _1, Scalar _2) -> Tensor _0 [ boxed unboxed ]
+  Batched: registered at /home/pytorch/aten/src/ATen/LegacyBatchingRegistrations.cpp:1079 :: (Tensor _0, Tensor _1, Scalar _2) -> Tensor _0 [ boxed unboxed ]
+  CPU: registered at /home/pytorch/build/aten/src/ATen/RegisterCPU_0.cpp:1309 :: (Tensor _0, Tensor _1, Scalar _2) -> Tensor _0 [ boxed unboxed ]
+  CUDA: registered at /home/pytorch/build/aten/src/ATen/RegisterCUDA_0.cpp:2494 :: (Tensor _0, Tensor _1, Scalar _2) -> Tensor _0 [ boxed unboxed ]
+  Meta: registered at /usr/local/lib/python3.10/dist-packages/torch/_meta_registrations.py:50 :: (none) [ boxed ]
+  Meta (inactive): registered at /home/pytorch/build/aten/src/ATen/RegisterMeta_0.cpp:1158 :: (Tensor _0, Tensor _1, Scalar _2) -> Tensor _0 [ boxed unboxed ]
+  SparseCPU: registered at /home/pytorch/build/aten/src/ATen/RegisterSparseCPU_0.cpp:341 :: (Tensor _0, Tensor _1, Scalar _2) -> Tensor _0 [ boxed unboxed ]
+  SparseCUDA: registered at /home/pytorch/build/aten/src/ATen/RegisterSparseCUDA_0.cpp:352 :: (Tensor _0, Tensor _1, Scalar _2) -> Tensor _0 [ boxed unboxed ]
+  SparseMeta: registered at /home/pytorch/build/aten/src/ATen/RegisterSparseMeta_0.cpp:142 :: (Tensor _0, Tensor _1, Scalar _2) -> Tensor _0 [ boxed unboxed ]
+  SparseCsrCPU: registered at /home/pytorch/build/aten/src/ATen/RegisterSparseCsrCPU_0.cpp:393 :: (Tensor _0, Tensor _1, Scalar _2) -> Tensor _0 [ boxed unboxed ]
+  SparseCsrCUDA: registered at /home/pytorch/build/aten/src/ATen/RegisterSparseCsrCUDA_0.cpp:409 :: (Tensor _0, Tensor _1, Scalar _2) -> Tensor _0 [ boxed unboxed ]
+  SparseCsrMeta: registered at /home/pytorch/build/aten/src/ATen/RegisterSparseCsrMeta_0.cpp:384 :: (Tensor _0, Tensor _1, Scalar _2) -> Tensor _0 [ boxed unboxed ]
+  NestedTensorCPU: registered at /home/pytorch/build/aten/src/ATen/RegisterNestedTensorCPU_0.cpp:309 :: (Tensor _0, Tensor _1, Scalar _2) -> Tensor _0 [ boxed unboxed ]
+  NestedTensorCUDA: registered at /home/pytorch/build/aten/src/ATen/RegisterNestedTensorCUDA_0.cpp:322 :: (Tensor _0, Tensor _1, Scalar _2) -> Tensor _0 [ boxed unboxed ]
+  NestedTensorHPU: registered at /home/pytorch/build/aten/src/ATen/RegisterNestedTensorHPU_0.cpp:297 :: (Tensor _0, Tensor _1, Scalar _2) -> Tensor _0 [ boxed unboxed ]
+  Autograd[alias]: registered at /home/pytorch/torch/csrc/autograd/generated/VariableType_2.cpp:20465 :: (Tensor _0, Tensor _1, Scalar _2) -> Tensor _0 [ boxed unboxed ]
+  CompositeExplicitAutogradNonFunctional[alias]: registered at /home/pytorch/build/aten/src/ATen/RegisterCompositeExplicitAutogradNonFunctional_0.cpp:1374 :: (Tensor _0, Tensor _1, Scalar _2) -> Tensor _0 [ boxed unboxed ]
+
+==========================================================================================
+[dispatch table] aten::add.Scalar
+==========================================================================================
+  name: aten::add.Scalar
+  schema: aten::add.Scalar(Tensor self, Scalar other, Scalar alpha=1) -> Tensor
+  debug: registered at /home/pytorch/build/aten/src/ATen/RegisterSchema.cpp:6
+  alias analysis kind: FROM_SCHEMA
+  Named: registered at /home/pytorch/aten/src/ATen/core/NamedRegistrations.cpp:11 :: (none) [ fallthrough boxed ]
+  ZeroTensor: registered at /home/pytorch/aten/src/ATen/ZeroTensorFallback.cpp:119 :: (none) [ fallthrough boxed ]
+  Tracer: registered at /home/pytorch/torch/csrc/autograd/generated/TraceType_2.cpp:18340 :: (Tensor _0, Scalar _1, Scalar _2) -> Tensor _0 [ boxed unboxed ]
+  FuncTorchBatched: registered at /home/pytorch/aten/src/ATen/functorch/BatchRulesBinaryOps.cpp:352 :: (Tensor _0, Scalar _1, Scalar _2) -> Tensor _0 [ boxed unboxed ]
+  Batched: registered at /home/pytorch/aten/src/ATen/LegacyBatchingRegistrations.cpp:1079 :: (Tensor _0, Scalar _1, Scalar _2) -> Tensor _0 [ boxed unboxed ]
+  Meta: registered at /usr/local/lib/python3.10/dist-packages/torch/_meta_registrations.py:50 :: (none) [ boxed ]
+  Autograd[alias]: registered at /home/pytorch/torch/csrc/autograd/generated/VariableType_2.cpp:20465 :: (Tensor _0, Scalar _1, Scalar _2) -> Tensor _0 [ boxed unboxed ]
+  CompositeExplicitAutograd[alias]: registered at /home/pytorch/build/aten/src/ATen/RegisterCompositeExplicitAutograd_0.cpp:2030 :: (Tensor _0, Scalar _1, Scalar _2) -> Tensor _0 [ boxed unboxed ]
+
+==========================================================================================
+[dispatch table] aten::add.out
+==========================================================================================
+  name: aten::add.out
+  schema: aten::add.out(Tensor self, Tensor other, *, Scalar alpha=1, Tensor(a!) out) -> Tensor(a!)
+  debug: registered at /home/pytorch/build/aten/src/ATen/RegisterSchema.cpp:6
+  alias analysis kind: FROM_SCHEMA
+  MkldnnCPU: registered at /home/pytorch/build/aten/src/ATen/RegisterMkldnnCPU_0.cpp:162 :: (Tensor _0, Tensor _1, Scalar _2, Tensor _3) -> Tensor _0 [ boxed unboxed ]
+  Functionalize: registered at /home/pytorch/build/aten/src/ATen/RegisterFunctionalization_0.cpp:24249 :: (Tensor _0, Tensor _1, Scalar _2, Tensor _3) -> Tensor _0 [ boxed unboxed ]
+  Named: registered at /home/pytorch/aten/src/ATen/core/NamedRegistrations.cpp:11 :: (none) [ fallthrough boxed ]
+  ADInplaceOrView: registered at /home/pytorch/torch/csrc/autograd/generated/ADInplaceOrViewType_0.cpp:5160 :: (Tensor _0, Tensor _1, Scalar _2, Tensor _3) -> Tensor _0 [ boxed unboxed ]
+  Tracer: registered at /home/pytorch/torch/csrc/autograd/generated/TraceType_2.cpp:18340 :: (Tensor _0, Tensor _1, Scalar _2, Tensor _3) -> Tensor _0 [ boxed unboxed ]
+  CPU: registered at /home/pytorch/build/aten/src/ATen/RegisterCPU_0.cpp:1309 :: (Tensor _0, Tensor _1, Scalar _2, Tensor _3) -> Tensor _0 [ boxed unboxed ]
+  CUDA: registered at /home/pytorch/build/aten/src/ATen/RegisterCUDA_0.cpp:2494 :: (Tensor _0, Tensor _1, Scalar _2, Tensor _3) -> Tensor _0 [ boxed unboxed ]
+  Meta: registered at /usr/local/lib/python3.10/dist-packages/torch/_meta_registrations.py:50 :: (none) [ boxed ]
+  Meta (inactive): registered at /home/pytorch/build/aten/src/ATen/RegisterMeta_0.cpp:1158 :: (Tensor _0, Tensor _1, Scalar _2, Tensor _3) -> Tensor _0 [ boxed unboxed ]
+  SparseCPU: registered at /home/pytorch/build/aten/src/ATen/RegisterSparseCPU_0.cpp:341 :: (Tensor _0, Tensor _1, Scalar _2, Tensor _3) -> Tensor _0 [ boxed unboxed ]
+  SparseCUDA: registered at /home/pytorch/build/aten/src/ATen/RegisterSparseCUDA_0.cpp:352 :: (Tensor _0, Tensor _1, Scalar _2, Tensor _3) -> Tensor _0 [ boxed unboxed ]
+  SparseMeta: registered at /home/pytorch/build/aten/src/ATen/RegisterSparseMeta_0.cpp:142 :: (Tensor _0, Tensor _1, Scalar _2, Tensor _3) -> Tensor _0 [ boxed unboxed ]
+  SparseCsrCPU: registered at /home/pytorch/build/aten/src/ATen/RegisterSparseCsrCPU_0.cpp:393 :: (Tensor _0, Tensor _1, Scalar _2, Tensor _3) -> Tensor _0 [ boxed unboxed ]
+  SparseCsrCUDA: registered at /home/pytorch/build/aten/src/ATen/RegisterSparseCsrCUDA_0.cpp:409 :: (Tensor _0, Tensor _1, Scalar _2, Tensor _3) -> Tensor _0 [ boxed unboxed ]
+  SparseCsrMeta: registered at /home/pytorch/build/aten/src/ATen/RegisterSparseCsrMeta_0.cpp:384 :: (Tensor _0, Tensor _1, Scalar _2, Tensor _3) -> Tensor _0 [ boxed unboxed ]
+  Autograd[alias]: registered at /home/pytorch/torch/csrc/autograd/generated/VariableType_4.cpp:20070 :: (Tensor _0, Tensor _1, Scalar _2, Tensor _3) -> Tensor _0 [ boxed unboxed ]
+
+==========================================================================================
+[dispatch table] aten::add_.Tensor
+==========================================================================================
+  name: aten::add_.Tensor
+  schema: aten::add_.Tensor(Tensor(a!) self, Tensor other, *, Scalar alpha=1) -> Tensor(a!)
+  debug: registered at /home/pytorch/build/aten/src/ATen/RegisterSchema.cpp:6
+  alias analysis kind: FROM_SCHEMA
+  MkldnnCPU: registered at /home/pytorch/build/aten/src/ATen/RegisterMkldnnCPU_0.cpp:162 :: (Tensor _0, Tensor _1, Scalar _2) -> Tensor _0 [ boxed unboxed ]
+  Functionalize: registered at /home/pytorch/build/aten/src/ATen/RegisterFunctionalization_0.cpp:24249 :: (Tensor _0, Tensor _1, Scalar _2) -> Tensor _0 [ boxed unboxed ]
+  Named: registered at /home/pytorch/aten/src/ATen/core/NamedRegistrations.cpp:11 :: (none) [ fallthrough boxed ]
+  ADInplaceOrView: registered at /home/pytorch/torch/csrc/autograd/generated/ADInplaceOrViewType_0.cpp:5160 :: (Tensor _0, Tensor _1, Scalar _2) -> Tensor _0 [ boxed unboxed ]
+  Tracer: registered at /home/pytorch/torch/csrc/autograd/generated/TraceType_2.cpp:18340 :: (Tensor _0, Tensor _1, Scalar _2) -> Tensor _0 [ boxed unboxed ]
+  FuncTorchBatched: registered at /home/pytorch/aten/src/ATen/functorch/BatchRulesBinaryOps.cpp:352 :: (none) [ boxed ]
+  CPU: registered at /home/pytorch/build/aten/src/ATen/RegisterCPU_0.cpp:1309 :: (Tensor _0, Tensor _1, Scalar _2) -> Tensor _0 [ boxed unboxed ]
+  CUDA: registered at /home/pytorch/build/aten/src/ATen/RegisterCUDA_0.cpp:2494 :: (Tensor _0, Tensor _1, Scalar _2) -> Tensor _0 [ boxed unboxed ]
+  Meta: registered at /usr/local/lib/python3.10/dist-packages/torch/_meta_registrations.py:50 :: (none) [ boxed ]
+  Meta (inactive): registered at /home/pytorch/build/aten/src/ATen/RegisterMeta_0.cpp:1158 :: (Tensor _0, Tensor _1, Scalar _2) -> Tensor _0 [ boxed unboxed ]
+  SparseCPU: registered at /home/pytorch/build/aten/src/ATen/RegisterSparseCPU_0.cpp:341 :: (Tensor _0, Tensor _1, Scalar _2) -> Tensor _0 [ boxed unboxed ]
+  SparseCUDA: registered at /home/pytorch/build/aten/src/ATen/RegisterSparseCUDA_0.cpp:352 :: (Tensor _0, Tensor _1, Scalar _2) -> Tensor _0 [ boxed unboxed ]
+  SparseMeta: registered at /home/pytorch/build/aten/src/ATen/RegisterSparseMeta_0.cpp:142 :: (Tensor _0, Tensor _1, Scalar _2) -> Tensor _0 [ boxed unboxed ]
+  SparseCsrCPU: registered at /home/pytorch/build/aten/src/ATen/RegisterSparseCsrCPU_0.cpp:393 :: (Tensor _0, Tensor _1, Scalar _2) -> Tensor _0 [ boxed unboxed ]
+  SparseCsrCUDA: registered at /home/pytorch/build/aten/src/ATen/RegisterSparseCsrCUDA_0.cpp:409 :: (Tensor _0, Tensor _1, Scalar _2) -> Tensor _0 [ boxed unboxed ]
+  SparseCsrMeta: registered at /home/pytorch/build/aten/src/ATen/RegisterSparseCsrMeta_0.cpp:384 :: (Tensor _0, Tensor _1, Scalar _2) -> Tensor _0 [ boxed unboxed ]
+  NestedTensorCPU: registered at /home/pytorch/build/aten/src/ATen/RegisterNestedTensorCPU_0.cpp:309 :: (Tensor _0, Tensor _1, Scalar _2) -> Tensor _0 [ boxed unboxed ]
+  NestedTensorCUDA: registered at /home/pytorch/build/aten/src/ATen/RegisterNestedTensorCUDA_0.cpp:322 :: (Tensor _0, Tensor _1, Scalar _2) -> Tensor _0 [ boxed unboxed ]
+  NestedTensorHPU: registered at /home/pytorch/build/aten/src/ATen/RegisterNestedTensorHPU_0.cpp:297 :: (Tensor _0, Tensor _1, Scalar _2) -> Tensor _0 [ boxed unboxed ]
+  Autograd[alias]: registered at /home/pytorch/torch/csrc/autograd/generated/VariableType_3.cpp:20096 :: (Tensor _0, Tensor _1, Scalar _2) -> Tensor _0 [ boxed unboxed ]
+  CompositeExplicitAutogradNonFunctional[alias]: registered at /home/pytorch/build/aten/src/ATen/RegisterCompositeExplicitAutogradNonFunctional_0.cpp:1374 :: (Tensor _0, Tensor _1, Scalar _2) -> Tensor _0 [ boxed unboxed ]
+
+==========================================================================================
+[per-key filter] 只显示 aten::add* 的注册
+==========================================================================================
+
+  --- DispatchKey::CPU ---  (共 1036 个注册)
+    aten::add_.Tensor
+    aten::addmv.out
+    aten::add.Tensor
+    aten::addcdiv.out
+    aten::addmm
+    aten::addcdiv
+    aten::addmm_
+    aten::addbmm.out
+    aten::addcmul
+    aten::addbmm_
+    aten::addcmul.out
+    aten::addr
+    aten::addcdiv_
+    aten::addmv_
+    aten::addcmul_
+    aten::addr.out
+    aten::addmm.out
+    aten::add.out
+    aten::addmv
+
+  --- DispatchKey::CUDA ---  (共 1351 个注册)
+    aten::addbmm
+    aten::add_.Tensor
+    aten::addmv.out
+    aten::addmm.dtype_out
+    aten::add.Tensor
+    aten::addcdiv.out
+    aten::addmm
+    aten::addcdiv
+    aten::addmm_
+    aten::addbmm.out
+    aten::addcmul
+    aten::addbmm_
+    aten::addcmul.out
+    aten::addr
+    aten::addcdiv_
+    aten::addmm.dtype
+    aten::addmv_
+    aten::addcmul_
+    aten::addr.out
+    aten::addmm.out
+    aten::add.out
+    aten::addmv
+
+  --- DispatchKey::Autograd ---  (共 2605 个注册)
+    aten::addbmm
+    aten::add_.Tensor
+    aten::addmv.out
+    aten::addmm.dtype_out
+    aten::add.Scalar
+    aten::add.Tensor
+    aten::addcdiv.out
+    aten::addmm
+    aten::addcdiv
+    aten::addmm_
+    aten::addbmm.out
+    aten::addcmul
+    aten::addbmm_
+    aten::addcmul.out
+    aten::addr
+    aten::addcdiv_
+    aten::add.Scalar_out
+    aten::addmm.dtype
+    aten::addmv_
+    aten::addr_
+    aten::addcmul_
+    aten::addr.out
+    aten::addmm.out
+    aten::add.out
+    aten::addmv
+    aten::add_.Scalar
+    aten::addbmm
+
+  --- DispatchKey::AutogradCPU ---  (共 0 个注册)
+    (no aten::add* registrations)
+
+  --- DispatchKey::AutogradCUDA ---  (共 0 个注册)
+    (no aten::add* registrations)
+
+  --- DispatchKey::CompositeExplicitAutograd ---  (共 1245 个注册)
+    aten::add.Scalar
+    aten::addr
+    aten::add.Scalar_out
+    aten::addr_
+    aten::addr.out
+    aten::add_.Scalar
+n::_nnpack_spatial_convolution
+aten::dist.out
+aten::bitwise_xor_.Scalar
+aten::adaptive_avg_pool1d.out
+inductor::accumulate_grad_
+aten::random.to
+prims::convert_element_type
+aten::native_fuse_ln_dropout.out
+aten::_foreach_sinh.out
+prims::frexp
+aten::copy_sparse_to_sparse.out
+aten::kaiser_window.out
+aten::special_chebyshev_polynomial_t.x_scalar_out
+aten::_foreach_tan
+aten::to_padded_tensor.out

@@ -1,5 +1,3 @@
-# 作业 2：PyTorch 调用矩阵乘法 / LayerNorm 并用 profiler 观察底层调用
-
 ## 目录内容
 
 | 文件 | 说明 |
